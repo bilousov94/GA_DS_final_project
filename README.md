@@ -1,3 +1,11 @@
+# Backend
+
+To start running an api, you need to navigate to backend folder and start
+
+### `python main.py`
+
+# Frontend
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
