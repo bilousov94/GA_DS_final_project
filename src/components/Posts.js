@@ -8,9 +8,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import {makeStyles} from "@material-ui/core/styles/index";
 
+
 const useStyles = makeStyles(theme => ({
     mainGrid: {
         marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(4),
     },
     card: {
         display: 'flex',

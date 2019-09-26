@@ -14,6 +14,7 @@ import MainPost from './components/MainPost';
 import Footer from './components/Footer';
 import Posts from './components/Posts';
 import TickerBox from './components/TickerBox'
+import Company from './components/Company';
 import Predictions from './components/Predictions'
 
 import update from 'immutability-helper';
@@ -27,13 +28,23 @@ const useStyles = makeStyles({
 });
 
 const initialState = {
+
+    //We using this states to control search results
     searchText: '',
-    test: '',
     pagination: false,
     pages: 0,
     tickers_left: [],
     tickers_right: [],
-    selectedTicker: false
+
+    // This data is using for rendering company info
+    companyInfo: null,
+    maxHistoryYear: null,
+    minHistoryYear: null,
+
+    //This data is using for as prediction filters
+    model: false,
+    predictionStartDate: null,
+    predictionEndDate: null
 };
 
 function reducer(state, action) {
@@ -45,17 +56,29 @@ function reducer(state, action) {
                 pagination: {$set: action.pagination},
                 tickers_left: {$set: action.tickersLeft},
                 tickers_right: {$set: action.tickersRight},
-                selectedTicker: {$set: action.selectedTicker}
             });
 
-        case 'SELECT_TICKER':
+        case 'STOCK_INFO':
             return update(state, {
-                selectedTicker: {$set: action.ticker},
+                companyInfo: {$set: action.companyInfo},
+                maxHistoryYear: {$set: action.maxYear},
+                minHistoryYear: {$set: action.minYear},
+                model: {$set: null}
             });
 
-        case 'CLEAN_TICKER':
+        case 'SELECT_MODEL':
             return update(state, {
-                selectedTicker: {$set: false},
+                model: {$set: action.model},
+                predictionStartDate: {$set: action.startDate},
+                predictionEndDate: {$set: action.endDate},
+            });
+
+        case 'CLEAN_COMPANY':
+            return update(state, {
+                companyInfo: {$set: null},
+                maxHistoryYear: {$set: null},
+                minHistoryYear: {$set: null},
+                model: {$set: null}
             });
 
         default:
@@ -87,12 +110,15 @@ export default function App() {
                 <AppContext.Provider value={{ state, dispatch }}>
                     <SearchBox/>
                     {(state.tickers_left.length) ? <TickerBox/> : null}
-                    {(state.selectedTicker) ? <Predictions /> : null}
+                    {(state.companyInfo) ? <Company/> : null}
+                    {(state.model) ? <Predictions /> : null}
+                    {/*<Company/>*/}
                     <main>
                         {/* Main featured post */}
                         <MainPost/>
                         <Posts/>
                     </main>
+
                 </AppContext.Provider>
             </Container>
             <Footer/>

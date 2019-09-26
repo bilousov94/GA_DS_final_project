@@ -29,7 +29,8 @@ const sections = [
     'Travel',
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+
     toolbar: {
         borderBottom: `1px solid black`,
     },
@@ -80,7 +81,7 @@ const useStyles = makeStyles(() => ({
 
 const searchApi = (search_text, dispatch) => {
         if(search_text){
-            fetch(`/search_tickers/${search_text}`)
+            fetch(`/search?text=${search_text}&page=0`)
                 .then(response => response.json())
                 .then(data => dispatch({ type: 'STOCK_SEARCH',
                                          search: data.search_text,
@@ -88,7 +89,6 @@ const searchApi = (search_text, dispatch) => {
                                          pages: data.pages,
                                          tickersLeft: data.tickers_left,
                                          tickersRight: data.tickers_right,
-                                         selectedTicker: false
                                         }))
         } else {
             dispatch({ type: 'STOCK_SEARCH',
@@ -97,7 +97,7 @@ const searchApi = (search_text, dispatch) => {
                        pages: 0,
                        tickersLeft: [],
                        tickersRight: [],
-                       selectedTicker: false});
+                       });
         }
     };
 

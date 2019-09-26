@@ -3,6 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import {makeStyles} from "@material-ui/core/styles/index";
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import CodeIcon from '@material-ui/icons/Code';
 
 const useStyles = makeStyles(theme => ({
     footer: {
@@ -16,8 +18,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Link color="inherit" href="https://www.linkedin.com/in/valentyn-bilousov/">
+                Valentyn Bilousov
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -31,10 +33,15 @@ export default function Footer() {
             <footer className={classes.footer}>
                 <Container maxWidth="lg">
                     <Typography variant="h6" align="center" gutterBottom>
-                        Footer
+                        Stock Prediction and News App
                     </Typography>
-                    <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                        Something here to give the footer a purpose!
+                    <Typography align="center">
+                        <Link color="inherit" href="https://www.linkedin.com/in/valentyn-bilousov/">
+                           <LinkedInIcon fontSize={'large'}/>
+                        </Link>
+                        <Link color="inherit" href="https://github.com/bilousov94">
+                            <CodeIcon fontSize={'large'}/>
+                        </Link>
                     </Typography>
                     <Copyright />
                 </Container>
